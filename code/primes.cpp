@@ -2,6 +2,8 @@
 Breaking the JavaScript Speed Limit with V8 
 (http://www.youtube.com/watch?v=UJPdhx5zTaw) **/
 
+#include <stdio.h>
+
 class Primes {
 	public:
 		int getPrimeCount() const { return prime_count; }
@@ -11,24 +13,24 @@ class Primes {
 		bool isDivisible(int i, int by) { return (i % by) == 0; }
 
 		bool isPrimeDivisible(int candidate) {
-			for (int i = 0; i < prime_count; i++) {
+			for (int i = 1; i < prime_count; ++i) {
 				if (isDivisible(candidate, primes[i])) return true;
 			}
 			return false;
 		}
 	private:
 		volatile int prime_count;
-		volatile int primes[25000];
+		volatile int primes[5000];
 };
 
 int main() {
 	Primes p;
 	int c = 1;
-	while (p.getPrimeCount() < 25000) {
+	while (p.getPrimeCount() < 5000) {
 		if (!p.isPrimeDivisible(c)) {
 			p.addPrime(c);
 		}
 		c++;
 	}
-	printf("%d\n", p.getPrime(p.getPrimeCount() - 1))
+	printf("%d\n", p.getPrime(p.getPrimeCount() - 1));
 }
