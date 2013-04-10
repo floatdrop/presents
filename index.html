@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Node.js - In-&#189;-Depth</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -39,10 +39,39 @@
 
 				<section>
 					<h1>Node.js</h1>
-					<h3>In-Depth</h3>
+					<h3>In-&#189;-Depth</h3>
 					<p>
 						<small>Created by <a href="https://github.com/floatdrop">Vsevolod Strukchinsky</a> / <a href="http://twitter.com/floatdrop">@floatdrop</a></small>
 					</p>
+				</section>
+
+				<section>
+					<section>
+						<h1>Overview</h1>
+						<h2 class="fragment">What is Node.JS</h2>
+					</section>
+
+					<section>
+						<h2>Node.js</h2>
+						<ol>
+							<li class="fragment"><span class="fragment highlight-green">Server</span>-side</li>
+							<li class="fragment"><span class="fragment highlight-green">JavaScript</span> framework</li>
+							<li class="fragment">which is <span class="fragment highlight-green">Asynchronous</span></li>
+						</ol>
+					</section>
+
+					<section>
+						<h2>Web server example</h2>
+
+						<code contenteditable> 
+require("http").createServer(function (request,response){
+    response.writeHeader(200, {"Content-Type": "text/plain"});  
+    response.write("Hello World");  
+    response.end();  
+}).listen(8080);
+						</code>
+					</section>
+
 				</section>
 
 			</div>
