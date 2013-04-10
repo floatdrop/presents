@@ -71,8 +71,7 @@
                                 Hello world server:
                                 <pre><code contenteditable>require("http").createServer(
 function (request, response) {
-    response.write("Hello World");
-    response.end();
+    response.end("Hello World");
 }).listen(8080);</code></pre>
                             </li>
                         </ol>
@@ -155,8 +154,7 @@ public static class Programm {
                 
                 <section>
                     <section>
-                        <h1>Asynchronous</h1>
-                        <h2>(libuv)</h2>
+                        <h1>Asynchronous pattern</h1>
                     </section>
                     <section>
                         <h2>Costs of input/output operations</h2>
@@ -176,6 +174,133 @@ public static class Programm {
                     <section>
                         <h2>How to solve time wasteing?</h2>
                         <h3 class="fragment">Threads</h3>
+                        <h2 class="fragment">How bad is it?</h2>
+                        <h3 class="fragment">It depends</h3>
+                    </section>
+                    <section>
+                        <h2>Python vs Threads</h2>
+                        <h4>(little story)</h4>
+
+                        <pre><code>def count(n):
+  while n > 0:
+    n -= 1
+
+t1 = Thread(target=count,args=(1000000,))
+t1.start()
+t1.join()
+t2 = Thread(target=count,args=(1000000,))
+t2.start()
+t2.join()
+</code></pre>
+
+<h3>0.13 s</h3>
+
+                    </section>
+                    <section>
+                        <h2>Python vs Threads</h2>
+                        <h4>(little story)</h4>
+
+                        <pre><code>def count(n):
+  while n > 0:
+    n -= 1
+
+t1 = Thread(target=count,args=(1000000,))
+t1.start()
+t2 = Thread(target=count,args=(1000000,))
+t2.start()
+t1.join(); t2.join()
+</code></pre>
+
+<h3 class="fragment">0.26 s</h3>
+                    </section>
+                    <section>
+                        <h2>Threads</h2>
+
+                        <p>Thread creation is memory expensive <br/>(type `ulimit -a | grep stack`).</p>
+                        <small class="fragment">Threadpool blocks incoming clients</small>
+                        <p>Context switching is not free</p>
+                    </section>
+                    <section>
+                        <h2>Memory battle</h2>
+
+                        <img src="images/nginx-apache-memory.png"/>
+                    </section>
+                    <section>
+                        <h2>Is there solution?</h2>
+                        <p class="fragment">Obviously yes, nginx using it :)</p>
+                    </section>
+                    <section>
+                        <p>Imagine queue <span class="fragment">that holding incoming events</span> <span class="fragment">and pointers to code that handle them</span></p>
+
+                        <img src="images/event-loop.png" class="fragment"/>
+
+                        <br/><br/>
+                        <a href="http://kunkle.org/nodejs-explained-pres/#/event-loop">Source</a> of images
+                    </section>
+                    <section>
+                        <h2>Instead of this</h2>
+                        <img src="images/waiting.png" alt="">
+                    </section>
+                    <section>
+                        <h2>Or this</h2>
+                        <img src="images/scaling-processes.png" alt="">
+                    </section>
+                    <section>
+                        <h2>We doing this</h2>
+                        <img src="images/scaling-event-loop.png" alt="">
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <h1>LIBUV</h1>
+
+                        <ol>
+                            <li class="fragment">Multiplatform <span class="fragment highlight-green">wrapper</span></li>
+                            <li class="fragment">written on <span class="fragment highlight-green">C++</span></li>
+                            <li class="fragment">provides <span class="fragment highlight-green">non-blocking operations</span> and much <a href="https://github.com/joyent/libuv">more</a></li>
+                        </ol>
+                    </section>
+                    <section>
+                        <h2>Long long time ago</h2>
+                        <h4>(Before PCI)</h4>
+
+                        <p>CPU took a work to copy bytes from FDD/HDD to memory.</p>
+
+                        <p class="fragment">And this was bad</p>
+                    </section>
+                    <section>
+                        <h2>Direct Memory Access</h2>
+                        <p>Devices can read or write from memory/or another device without using CPU</p>
+                    </section>
+                    <section>
+                        <h2>IOCP/epoll/kevent</h2>
+                        <p style="clear: both;">Now system can notify your process, when device is ready, or file is readed in memory.</p>
+                        <img src="images/lsp.jpg" class="fragment" style="float:left; width: 300px; margin: 20px;">
+                        <img src="images/ulk.jpg" class="fragment" style="float:left; width: 300px; margin: 20px;">
+                    </section>
+                    <section>
+                        <h2>LIBUV Guts - event loop</h2>
+                        <pre><code>int uv_run(uv_loop_t* loop, uv_run_mode mode) {
+  r = uv__loop_alive(loop);
+  while (r != 0 && loop->stop_flag == 0) {
+    uv__update_time(loop);
+    uv__run_timers(loop);
+    uv__run_idle(loop);
+    uv__run_prepare(loop);
+    uv__run_pending(loop);
+    loop(uv__io_poll, timeout);
+    uv__run_check(loop);
+    uv__run_closing_handles(loop);
+    r = uv__loop_alive(loop);
+
+    if (mode & (UV_RUN_ONCE | UV_RUN_NOWAIT)) break;
+  }
+}</code></pre>
+<pre><code>static int uv__loop_alive(uv_loop_t* loop) {
+  return uv__has_active_handles(loop) ||
+         uv__has_active_reqs(loop) ||
+         loop->closing_handles != NULL;
+}</code></pre>
                     </section>
                 </section>
             </div>
