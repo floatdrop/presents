@@ -249,6 +249,24 @@ t1.join(); t2.join()
                         <h2>We doing this</h2>
                         <img src="images/scaling-event-loop.png" alt="">
                     </section>
+                    <section>
+                        <h2>Example</h2>
+                        <pre><code>setTimeout(function () {
+  console.log('This will still run.');
+}, 500);</code></pre>
+                        <pre><code>var fs = require('fs');
+var stream = fs.createReadStream('huge.txt');
+ 
+stream.on('data', function(data) {
+ console.log(data);
+});
+stream.on('end', function() {
+ console.log('done');
+});
+stream.on('error', function(err) {
+ console.log(err);
+});</code></pre>
+                    </section>
                 </section>
                 <section>
                     <section>
