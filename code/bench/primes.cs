@@ -6,11 +6,9 @@ namespace Application
 	{
 		public int prime_count;
 		public int[] primes = new int[5000];
-
 		public int getPrimeCount () { return this.prime_count; }
 		public int getPrime (int i) { return this.primes[i]; }
 		public void addPrime (int p) { this.primes[this.prime_count++] = p; }
-
 		public bool isDivisible(int i, int by) { return (i % by) == 0; }
 
 		public bool isPrimeDivisible(int candidate) {
@@ -20,7 +18,6 @@ namespace Application
 			return false;
 		}
 	}
-
 	public static class Programm {
 		public static void Main() {
 			Primes p = new Primes();
@@ -34,6 +31,5 @@ namespace Application
 			System.Console.WriteLine(p.getPrime(p.getPrimeCount() - 1));
 		}
 	}
-
 }
 

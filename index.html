@@ -1,113 +1,217 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-		<title>Node.js - In-&#189;-Depth</title>
+        <title>Node.js - In-&#189;-Depth</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+        <link rel="stylesheet" href="css/reveal.min.css">
+        <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
 
-	<body>
+    <body>
 
-		<div class="reveal">
+        <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
 
-				<section>
-					<h1>Node.js</h1>
-					<h3>In-&#189;-Depth</h3>
-					<p>
-						<small>Created by <a href="https://github.com/floatdrop">Vsevolod Strukchinsky</a> / <a href="http://twitter.com/floatdrop">@floatdrop</a></small>
-					</p>
-				</section>
+                <section>
+                    <h1>Node.js</h1>
+                    <h3>In-&#189;-Depth</h3>
+                    <p>
+                        <small>Created by <a href="https://github.com/floatdrop">Vsevolod Strukchinsky</a> / <a href="http://twitter.com/floatdrop">@floatdrop</a></small>
+                    </p>
+                </section>
 
-				<section>
-					<section>
-						<h1>Overview</h1>
-						<h2 class="fragment">What is Node.JS</h2>
-					</section>
+                <section>
+                    <section>
+                        <h1>Overview</h1>
+                        <h2 class="fragment">What is Node.JS</h2>
+                    </section>
 
-					<section>
-						<h2>Node.js</h2>
-						<ol>
-							<li class="fragment"><span class="fragment highlight-green">Server</span>-side</li>
-							<li class="fragment"><span class="fragment highlight-green">JavaScript</span> framework</li>
-							<li class="fragment">which is <span class="fragment highlight-green">Asynchronous</span></li>
-						</ol>
-					</section>
+                    <section>
+                        <h2>Node.js</h2>
+                        <ol>
+                            <li class="fragment"><span class="fragment highlight-green">Server</span>-side</li>
+                            <li class="fragment"><span class="fragment highlight-green">JavaScript</span> framework</li>
+                            <li class="fragment">which is <span class="fragment highlight-green">Asynchronous</span></li>
+                        </ol>
+                    </section>
 
-					<section>
-						<h2>Web server example</h2>
+                    <section>
+                        <h2>Examples</h2>
+                        <ol style="width: 600px;">
+                            <li>
+                            Hello world:
+                                <pre><code contenteditable>console.log('hello world');</code></pre>
+                            </li>
+                            <li class="fragment">
+                                Hello world server:
+                                <pre><code contenteditable>require("http").createServer(
+function (request, response) {
+    response.write("Hello World");
+    response.end();
+}).listen(8080);</code></pre>
+                            </li>
+                        </ol>
+                    </section>
+                    
+                    <section>
+                        <h2>Web server performance</h2>
 
-						<code contenteditable> 
-require("http").createServer(function (request,response){
-    response.writeHeader(200, {"Content-Type": "text/plain"});  
-    response.write("Hello World");  
-    response.end();  
-}).listen(8080);
-						</code>
-					</section>
+                        <img src="images/performance-comparison-net-nodejs.png"/>
 
-				</section>
+                        <p><a href="http://www.salmanq.com/blog/net-and-node-js-performance-comparison/2013/03/">.NET and Node.JS – Performance Comparison</a></p>
+                    </section>
 
-			</div>
+                    <section>
+                        <h2>Architecture</h2>
+                        <h3>(old version)</h3>
+                        <img src="images/nodejsarch.png"/>
+                    </section>
 
-		</div>
+                </section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+                <section>
+                    <section>
+                        <h1>Google  <img src="images/google_v8.png" width="280px" style="vertical-align: middle; background-color: white;" alt="V8"/></h1>
+                       <ol>
+                           <li class="fragment">JavaScript engine</li>
+                           <li class="fragment">which is Fast</li>
+                           <li class="fragment">and open source</li>
+                       </ol>
+                    </section>
+                    <section>
+                        <h2>Benchmark</h2>
+                        <h3>Counting 5000 primes</h3>
+                    </section>
+                    <section>
+                        <h3>C# Code:</h3>
+                        <pre><code style="font-size:9pt; line-height: 10pt;">public class Primes
+{
+    public int prime_count;
+    public int[] primes = new int[5000];
+    public int getPrimeCount () { return this.prime_count; }
+    public int getPrime (int i) { return this.primes[i]; }
+    public void addPrime (int p) { this.primes[this.prime_count++] = p; }
+    public bool isDivisible(int i, int by) { return (i % by) == 0; }
 
-		<script>
+    public bool isPrimeDivisible(int candidate) {
+        for (int i = 1; i < this.prime_count; ++i) {
+            if (this.isDivisible(candidate, this.primes[i])) return true;
+        }
+        return false;
+    }
+}
+public static class Programm {
+    public static void Main() {
+        Primes p = new Primes();
+        int c = 1;
+        while (p.getPrimeCount() < 5000) {
+            if (!p.isPrimeDivisible(c)) {
+                p.addPrime(c);
+            }
+            c++;
+        }
+        System.Console.WriteLine(p.getPrime(p.getPrimeCount() - 1));
+    }
+}</code></pre>
+                    </section>
+                    <section>
+                        <h2>Results</h2>
+                        <div style="border-bottom: 5px solid #FFFFFF; width: 100%; height: 100px;"></div>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -70px; margin-left: 9%;">C++<br/>|<br/>0.09</p>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -70px; margin-left: 22%;">C#<br/>|<br/>0.12</p>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -70px; margin-left: 34%;">Java<br/>|<br/>0.17</p>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -70px; margin-left: 90%;">Python<br/>|<br/>31</p>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -70px; margin-left: 110%;">Ruby<br/>|<br/>?</p>
+                        <p class="fragment fade-in" style="position: absolute; margin-top: -113px; margin-left: 11%;">JavaScript (V8)<br/><br/>|<br/><br/>0.11</p>
+                        <br/><br/><br/>
+                        <small>Source code of benchmarks are <a href="code/bench">here</a></small>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h1>Asynchronous</h1>
+                        <h2>(libuv)</h2>
+                    </section>
+                    <section>
+                        <h2>Costs of input/output operations</h2>
+                        <ol>
+                            <li>L1 &mdash; 3 cycles</li>
+                            <li>L2 &mdash; <span class="fragment fade-in">14 cycles</span></li>
+                            <li>RAM &mdash; <span class="fragment fade-in">250 cycles</span></li>
+                            <li>DISK &mdash; <span class="fragment fade-in">41 000 000 cycles</span></li>
+                            <li>NETWORK &mdash; <span class="fragment fade-in">240 000 000 cycles</span></li>
+                        </ol>
+                        <br/><br/>
+                        <h3 class="fragment">We waste time on waiting for disk or network read!</h3>
+                        <h4 class="fragment">(if we use synchronized methods)</h4>
+                        <br/><br/>
+                        <small><a href="http://duartes.org/gustavo/blog/post/what-your-computer-does-while-you-wait">What Your Computer Does While You Wait</a></small>
+                    </section>
+                    <section>
+                        <h2>How to solve time wasteing?</h2>
+                        <h3 class="fragment">Threads</h3>
+                    </section>
+                </section>
+            </div>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        </div>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        <script>
 
-		</script>
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
 
-	</body>
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+                    // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
 </html>
