@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<link rel="stylesheet" href="shower/themes/bright/styles/screen.css">
+	<!--
+		To apply styles to the certain slides
+		set slide ID to get needed elements
+		-->
+	<style>
+		@font-face
+		{
+			font-family: firstorder;
+			src: url('fonts/firstv2.ttf');
+		}
+		.caption h1 {
+			font-family: firstorder;
+		}
+		.auxilium {
+			font-family: firstorder !important;
+		}
+		.cover h2 {
+			margin:30px 0 0;
+			color:#FFF;
+			text-align:center;
+			font-size:100px;
+			}
+		.cover p {
+			margin:10px 0 0;
+			text-align:center;
+			color:#FFF;
+			font-style:italic;
+			font-size:20px;
+			}
+		.cover p a {
+			color:#FFF;
+			}
+		#Picture h2 {
+			color:#FFF;
+			}
+		#SeeMore h2 {
+			font-size: 64px;
+			}
+		#SeeMore h2 a {
+			color: #FFF;
+		}
+		#SeeMore img.octocat {
+			width: 2em;
+			vertical-align: middle !important;
+			z-index: 2;
+			position: static;
+			}
+		#about p.bigtext {
+			font-size: 64px;
+		}
+		.bignumber {
+			font-size: 64px;
+		}
+		#No h2 {
+			font-size: 120px;
+		}
+	</style>
+</head>
+<body class="list">
+	<header class="caption">
+		<h1>Auxilium</h1>
+		<p>Social network game</p>
+	</header>
+	<section class="slide cover" id="Cover"><div>
+		<h2 class="auxilium">Auxilium</h2>
+		<p>Presented by <a href="http:/github.com/floatdrop">Vsevolod Strukchinsky</a></p>
+		<img src="pictures/sworcery.png" alt="screenshot of Swordandsworcery game, http://www.swordandsworcery.com/">
+		<!-- screenshot of Swordandsworcery game, http://www.swordandsworcery.com/ -->
+	</div></section>
+	<section class="slide" id="about"><div>
+		<h2>What is all about</h2>
+		<p class="bigtext">This is <span class="next">multi-player real time <span class="next"> social network</span></span> game </p>
+		<p class="note">Auxilium [aʊkˈsi.li.um] noun. Help, aid.</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Why would we do that?</h2>
+		<ol>
+			<li class="next">We like creating games</li>
+			<li class="next">We love to experiment on humans</li>
+			<li class="next">We enjoy tough problems</li>
+		</ol>
+		<p class="next">Also there is a set of interesing experiments, that can be performed with huge scale in social networks.</p>
+	</div></section>
+	<section class="slide cover"><div>
+		<h2>Work in progress</h2>
+		<img src="pictures/world.png" width="100%">
+	</div></section>
+	<section class="slide"><div>
+		<h2>Open sourced</h2>
+		<p>We are hosting code at <a href="http://github.com/floatdrop/aux">github</a> and contributing in other <a href="https://github.com/GoodBoyDigital/pixi.js">projects</a> that we use.</p>
+		<p class="next">Quests and NPC AI will be private of cource.</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Current state</h2>
+		<p><span class="next bignumber">25</span> players can play at once on <span class="next"><span class="bignumber">¼</span> of</span> world map</p>
+	</div></section>
+	<section class="slide"><div>
+		<h2>Why do it from scratch?</h2>
+		<p>Because there is no multiplayer engines for NodeJS.</p>
+		<p class="next">To be honets, there is <a href="https://github.com/onedayitwillmake/RealtimeMultiplayerNodeJs">RealtimeMultiplayerNodeJs</a>, but it's more dead than alive.</p>
+	</div></section>
+	<section class="slide shout"><div>
+		<h2>So do we have any data?</h2>
+	</div></section>
+	<section class="slide" id="No"><div>
+		<h2>No<span class="next">t yet</span></h2>
+		<p></p>
+	</div></section>
+	<section class="slide cover" id="SeeMore"><div>
+		<h2><img class="octocat" src="pictures/Octocat.png" alt=""> <a href="https://github.com/floatdrop/Aux">Watch us on GitHub</a></h2>
+		<img src="pictures/sea.png" width="100%">
+	</div></section>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"><div></div></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2013 Yours Truly, Famous Inc. -->
+</body>
+</html>
